@@ -1,19 +1,20 @@
 # Build a pizza!
 
 
+user_pizza = []
+
+
 size_price_sets = {
-    "Small": 6.99,
-    "Medium": 9.99,
-    "Large": 12.99,
-    "X-Large": 15.99
+    "small": 6.99,
+    "medium": 9.99,
+    "large": 12.99,
+    "x-large": 15.99
 }
 
-# topping_cheese = ["No cheese", "Mozzarella" ]
-
 cheeses = {
-    "No cheese": 0.00,
-    "Mozzarella": 0.00,
-    "Double Mozzarella": 2.00
+    "no cheese": 0.00,
+    "mozzarella": 0.00,
+    "double mozzarella": 2.00
 }
 
 toppings_protein = ["Pepperoni","Sausage","Ham"]
@@ -28,17 +29,15 @@ toppings_veggies = [
     "Pineapple"
 ]
 
-user_pizza = []
-
 
 # Function to choose size
-def choose_size(size):
+def choose_size():
     print("Choose size: Small, Medium, Large, or Extra Large?")
-    input(f"Enter size: {size}")
-    #print("Enter size: ")
-    if size in size_price_sets:
-        # return size, size_price_sets[size]
-        print(f"you have chosen size {size}.")
+    size = input(f"Enter size: ").lower()
+    if size in ["extra large", "x-large"]:
+        return size, size_price_sets["x-large"]
+    elif size in size_price_sets:
+        return size, size_price_sets[size]
     else:
         print("Invalid size. Please enter a valid size.")
         return choose_size()
@@ -52,37 +51,35 @@ def choose_cheese():
     print("Would you like cheese?")
     wants_cheese = input("Yes or no: ")
     cheese = "No cheese"
-    if wants_cheese == "No":
-        if cheese in topping_cheese:
+    if wants_cheese == "no":
+        if cheese in cheeses:
             return cheese, cheeses[cheese]
         else:
-            print("Cheese error")
-    elif wants_cheese == "Yes":
-        print("Double cheese, or regular?")
-        is_double_cheese = input("Double or Regular? ")
-        if is_double_cheese == "Double":
-            cheese = "Double Mozzarella"
+            print("Cheese error. Did you want cheese?")
+            return choose_cheese()
+    elif wants_cheese == "yes":
+        print("Great! Double cheese, or regular?")
+        is_double_cheese = input("double or regular? ")
+        cheese = "Double Mozzarella"
+        if is_double_cheese in ["double", "double cheese", "double mozzarella"]:
             if cheese in cheeses:
                 return cheese, cheeses[cheese]
-        elif is_double_cheese == "Regular":
+        elif is_double_cheese in ["regular", "regular cheese"]:
             cheese = "Mozzarella"
             if cheese in cheeses:
                 return cheese, cheeses[cheese]
         else:
             print("Error with cheese option. Please try again.")
             return choose_cheese()
+    print("Awesome. Let's start working on your toppings... ")
     
 
 # Choose toppings
 # def choose_toppings():
 
-    
-
 
 
 print("Hello, customer! Build your pizza:")
-    
-    
-user_size = "Small"
-
-choose_size(user_size)
+choose_size()
+# choose_cheese()
+print(user_pizza)
