@@ -57,7 +57,8 @@ def choose_cheese():
     cheese = "No cheese"
     if wants_cheese == "no":
         if cheese in cheeses:
-            return cheese, cheeses[cheese]
+            cheese_set = cheese, cheeses[cheese]
+            return cheese_set
         else:
             print("Cheese error. Did you want cheese?")
             return choose_cheese()
@@ -85,5 +86,5 @@ def choose_cheese():
 
 print("Hello, customer! Build your pizza:")
 choose_size()
-# choose_cheese()
 print(user_pizza)
+choose_cheese()
