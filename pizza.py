@@ -35,9 +35,13 @@ def choose_size():
     print("Choose size: Small, Medium, Large, or Extra Large?")
     size = input(f"Enter size: ").lower()
     if size in ["extra large", "x-large"]:
-        return size, size_price_sets["x-large"]
+        size_set = size, size_price_sets["x-large"]
+        user_pizza.append(size_set)
+        return size_set
     elif size in size_price_sets:
-        return size, size_price_sets[size]
+        size_set = size, size_price_sets["x-large"]
+        user_pizza.append(size_set)
+        return size_set
     else:
         print("Invalid size. Please enter a valid size.")
         return choose_size()
