@@ -39,7 +39,7 @@ def choose_size():
         user_pizza.append(size_set)
         return size_set
     elif size in size_price_sets:
-        size_set = size, size_price_sets["x-large"]
+        size_set = size, size_price_sets[size]
         user_pizza.append(size_set)
         return size_set
     else:
@@ -53,11 +53,13 @@ def choose_size():
 # Choose cheese
 def choose_cheese():
     print("Would you like cheese?")
-    wants_cheese = input("Yes or no: ")
-    cheese = "No cheese"
-    if wants_cheese == "no":
+    wants_cheese = input("Yes or no: ").lower()
+    cheese = "no cheese"
+    if wants_cheese in ["no" , "nope" , "no thank you"]:
         if cheese in cheeses:
+            print('Okay, you do not want cheese. Got it.')
             cheese_set = cheese, cheeses[cheese]
+            user_pizza.append(cheese_set)
             return cheese_set
         else:
             print("Cheese error. Did you want cheese?")
@@ -68,19 +70,26 @@ def choose_cheese():
         cheese = "Double Mozzarella"
         if is_double_cheese in ["double", "double cheese", "double mozzarella"]:
             if cheese in cheeses:
-                return cheese, cheeses[cheese]
+                cheese_set = cheese, cheeses[cheese]
+                user_pizza.append(cheese_set)
+                return cheese_set
         elif is_double_cheese in ["regular", "regular cheese"]:
             cheese = "Mozzarella"
             if cheese in cheeses:
-                return cheese, cheeses[cheese]
+                cheese_set = cheese, cheeses[cheese]
+                user_pizza.append(cheese_set)
+                return cheese_set
         else:
             print("Error with cheese option. Please try again.")
             return choose_cheese()
-    print("Awesome. Let's start working on your toppings... ")
+        print("Awesome. Let's start working on your toppings... ")
+    else:
+        print("ERROR:  Please use 'Yes' or 'No' only.")
     
 
 # Choose toppings
-# def choose_toppings():
+def choose_toppings():
+    print('toppings function invoked')
 
 
 
@@ -88,3 +97,5 @@ print("Hello, customer! Build your pizza:")
 choose_size()
 print(user_pizza)
 choose_cheese()
+print(user_pizza)
+choose_toppings()
