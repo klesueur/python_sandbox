@@ -89,7 +89,8 @@ def choose_cheese():
 
 # Choose toppings
 def choose_toppings():
-    print('toppings function invoked')
+    print('How about toppings?')
+    is_
 
 
 
@@ -99,3 +100,4 @@ print(user_pizza)
 choose_cheese()
 print(user_pizza)
 choose_toppings()
+print(user_pizza)
