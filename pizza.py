@@ -14,20 +14,21 @@ size_price_sets = {
 cheeses = {
     "no cheese": 0.00,
     "mozzarella": 0.00,
-    "double mozzarella": 2.00
+    "double mozzarella": 1.50
 }
 
-toppings_protein = ["Pepperoni","Sausage","Ham"]
-
 # Make all veggie toppings 0.50 each
-toppings_veggies = [
-    "Green Peppers",
-    "Olives",
-    "Mushrooms",
-    "Onion",
-    "Basil",
-    "Pineapple"
-]
+toppings = {
+    "Pepperoni": 1.50,
+    "Sausage": 1.50,
+    "Ham": 1.50,
+    "Green Peppers": 1.00,
+    "Olives": 1.00,
+    "Mushrooms": 1.00,
+    "Onion": 1.00,
+    "Basil": 0.50,
+    "Pineapple": 1.50
+}
 
 
 # Function to choose size
@@ -45,9 +46,6 @@ def choose_size():
     else:
         print("Invalid size. Please enter a valid size.")
         return choose_size()
-
-# def choose_size(size):
-#     print(size)
     
 
 # Choose cheese
@@ -57,7 +55,7 @@ def choose_cheese():
     cheese = "no cheese"
     if wants_cheese in ["no" , "nope" , "no thank you"]:
         if cheese in cheeses:
-            print('Okay, you do not want cheese. Got it.')
+            print('Okay, no cheese. Got it.')
             cheese_set = cheese, cheeses[cheese]
             user_pizza.append(cheese_set)
             return cheese_set
@@ -66,15 +64,15 @@ def choose_cheese():
             return choose_cheese()
     elif wants_cheese == "yes":
         print("Great! Double cheese, or regular?")
-        is_double_cheese = input("double or regular? ")
-        cheese = "Double Mozzarella"
+        is_double_cheese = input("Type 'Double' or 'Regular': ")
+        cheese = "double mozzarella"
         if is_double_cheese in ["double", "double cheese", "double mozzarella"]:
             if cheese in cheeses:
                 cheese_set = cheese, cheeses[cheese]
                 user_pizza.append(cheese_set)
                 return cheese_set
         elif is_double_cheese in ["regular", "regular cheese"]:
-            cheese = "Mozzarella"
+            cheese = "mozzarella"
             if cheese in cheeses:
                 cheese_set = cheese, cheeses[cheese]
                 user_pizza.append(cheese_set)
@@ -89,8 +87,22 @@ def choose_cheese():
 
 # Choose toppings
 def choose_toppings():
-    print('How about toppings?')
-    is_
+    topping_choices = []
+    print('Any toppings?')
+    wants_toppings = input("Yes or No: ").lower()
+    if wants_toppings in ["no","no thank you", "nope"]:
+        is_just_cheese = input("Okay, so just cheese?: ")
+        if is_just_cheese in ["yes", "correct", "ya", "yeah", "yep"]:
+            print("Great! Let's review your pizza order...")
+            return
+        elif is_just_cheese == "no":
+            print("Got it. Okay, what toppings would you like?")
+            print("Toppings List: " + topping_choices)
+            choose_toppings()
+        else:
+            print("Toppings error. Please try again.")
+            print(toppings)
+    print(topping_choices)
 
 
 
@@ -100,4 +112,5 @@ print(user_pizza)
 choose_cheese()
 print(user_pizza)
 choose_toppings()
+print("Pizza order: ")
 print(user_pizza)
